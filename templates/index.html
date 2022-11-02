@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PyScriptRunner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main>
+    <h1>PyScriptRunner</h1>
+    <hr>
+    <br>
+    <a href="{{ url_for('add') }}">Add Script</a>
+    <br>
+    {% if get_flashed_messages()|length > 0 %}
+        <br>
+        <br>
+        {% for msg in get_flashed_messages() %}
+            <strong style="color:orange;">{{ msg }}</strong>
+        {% endfor %}
+        <br>
+    {% endif %}
+    <br>
+    {% if scripts|length > 0 %}
+        <table>
+            <tr>
+                <th>Script</th>
+                <th style="text-align: center;" colspan="3">Action</th>
+            </tr>
+            {% for script in scripts %}
+                <tr>
+                    <td>{{ script['name'] }}</td>
+                    <td><a href="{{ url_for('execute', id=script['id']) }}">Execute</a></td>
+                    <td><a href="{{ url_for('edit', id=script['id']) }}">Edit</a></td>
+                    <td><a href="{{ url_for('delete', id=script['id']) }}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No scripts found, please add one.</p>
+    {% endif %}
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PyScriptRunner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main>
+    <h1>PyScriptRunner</h1>
+    <hr>
+    <br>
+    <form action="{{ url_for('new_script') }}" method="post">
+        <label for="script_name">Script Name:</label>
+        <br>
+        <input id="script_name" name="script_name" type="text" value="{{ script_name }}"/>
+        <br>
+        <label for="code">Code:</label>
+        <br>
+        <code>
+            <textarea id="code" name="code" rows="20">{{ code }}</textarea>
+        </code>
+        <br>
+        <input type="submit" value="Create Script"/>
+        <input type="button" onclick="parent.location='/'" value="Cancel"/>
+    </form>
+    {% for msg in get_flashed_messages() %}
+        <strong style="color: orange;">{{ msg }}</strong>
+    {% endfor %}
+</main>
+</body>
+</html>
